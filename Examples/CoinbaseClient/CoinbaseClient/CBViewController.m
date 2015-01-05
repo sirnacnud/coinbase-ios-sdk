@@ -7,7 +7,9 @@
 //
 
 #import "CBViewController.h"
-#import "CBTransaction.h"
+#import <Coinbase/CBAccount.h>
+#import <Coinbase/CBTransaction.h>
+#import <Coinbase/CBUser.h>
 #import <NSHash/NSString+NSHash.h>
 #import <NSDate+TimeAgo/NSDate+TimeAgo.h>
 #import <SAMCategories.h>
@@ -212,6 +214,15 @@
             if (error) {
                 NSLog(@"%@", error);
             } else {
+                [Coinbase getUser:^(CBUser *user, NSError *error) {
+                    if( !error )
+                    {
+                        [user getAccounts:^(NSArray *account, NSError *error) {
+                            
+                        }];
+                    }
+                }];
+                
                 [Coinbase getAccount:^(CBAccount *account, NSError *error) {
                     self.account = account;
                     [self.headerLabel setText:self.account.name];

@@ -7,7 +7,9 @@
 //
 
 #import "CBAccount.h"
+#import "CBRequest.h"
 #import "CBTokens.h"
+#import "CBTransaction.h"
 
 @implementation CBAccount
 

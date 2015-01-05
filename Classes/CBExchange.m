@@ -7,6 +7,7 @@
 //
 
 #import "CBExchange.h"
+#import "CBRequest.h"
 #import "CBTokens.h"
 
 @implementation CBExchange

@@ -7,12 +7,8 @@
 //
 
 #import <Foundation/Foundation.h>
-#import "CBRequest.h"
 
-@class CBTransaction;
-
-typedef void (^TransactionHandler)(CBTransaction *transaction, NSError *error);
-typedef void (^RequestActionHandler)(BOOL success, NSError *error);
+#include "CBHandlers.h"
 
 @interface CBTransaction : NSObject
 @property NSString *name;

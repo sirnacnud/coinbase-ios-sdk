@@ -7,13 +7,8 @@
 //
 
 #import <Foundation/Foundation.h>
-#import "CBTransaction.h"
-#import "CBRequest.h"
 
-typedef void (^TransactionsHandler)(NSArray *transactions, NSError *error);
-typedef void (^BalanceHandler)(NSString *balance, NSError *error);
-typedef void (^AddressHandler)(NSString *address, NSError *error);
-typedef void (^AddressListHandler)(NSArray *addressList, NSError *error);
+#include "CBHandlers.h"
 
 @interface CBAccount : NSObject
 @property NSString *name;

@@ -7,13 +7,11 @@
 //
 
 #import <Foundation/Foundation.h>
-#import "CBAccount.h"
+
+#include "CBHandlers.h"
 
 FOUNDATION_EXPORT NSString *const CB_AUTH_CODE_NOTIFICATION_TYPE;
 FOUNDATION_EXPORT NSString *const CB_AUTH_CODE_URL_KEY;
-
-typedef void (^AccountHandler)(CBAccount *account, NSError *error);
-typedef void (^LoginHandler)(NSError *error);
 
 @interface Coinbase : NSObject
 
@@ -31,6 +29,7 @@ typedef void (^LoginHandler)(NSError *error);
 
 + (void)registerAuthCode:(NSString *)authCode;
 
-+ (void)getAccount:(AccountHandler)handler;
++ (void)getAccount:(AccountHandler)handler __attribute__((deprecated("Use getUser instead")));
++ (void)getUser:(UserHandler)handler;
 
 @end

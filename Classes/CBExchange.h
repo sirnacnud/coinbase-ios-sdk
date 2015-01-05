@@ -7,10 +7,8 @@
 //
 
 #import <Foundation/Foundation.h>
-#import "CBRequest.h"
 
-typedef void (^PriceHandler)(NSString *price, NSError *error);
-typedef void (^CurrenciesHandler)(NSArray* currencies, NSError *error);
+#include "CBHandlers.h"
 
 @interface CBExchange : NSObject
 

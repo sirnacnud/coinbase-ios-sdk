@@ -7,8 +7,10 @@
 //
 
 #import "Coinbase.h"
+#import "CBAccount.h"
 #import "CBRequest.h"
 #import "CBTokens.h"
+#import "CBUser.h"
 
 NSString *const CB_AUTH_CODE_NOTIFICATION_TYPE = @"CB_AUTHCODE_NOTIFICATION";
 NSString *const CB_AUTH_CODE_URL_KEY = @"CB_AUTHCODE_URL";
@@ -150,6 +152,37 @@ static NSString *permissionsList;
                 account.sellLimit = [[user objectForKey:@"sell_limit"] objectForKey:@"amount"];
                 
                 handler(account, nil);
+                
+            } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
+                handler(nil, error);
+            }];
+        }
+    }];
+}
+
++ (void)getUser:(UserHandler)handler {
+    [CBRequest authorizedRequest:^(NSDictionary *result, NSError *error) {
+        if (error) {
+            handler(nil, error);
+        } else {
+            AFHTTPRequestOperationManager *manager = [AFHTTPRequestOperationManager manager];
+            manager.responseSerializer = [AFJSONResponseSerializer serializer];
+            [manager GET:[NSString stringWithFormat:@"https://api.coinbase.com/v1/users/self?access_token=%@", [CBTokens accessToken]] parameters:nil success:^(AFHTTPRequestOperation *operation, id JSON) {
+                
+                NSDictionary *userJson = [JSON objectForKey:@"user"];
+                
+                __block CBUser *user = [[CBUser alloc] init];
+                user.name = [userJson objectForKey:@"name"];
+                user.email = [userJson objectForKey:@"email"];
+                user.balance = [[userJson objectForKey:@"balance"] objectForKey:@"amount"];
+                user.timeZone = [userJson objectForKey:@"time_zone"];
+                user.cbId = [userJson objectForKey:@"id"];
+                user.buyLevel = [userJson objectForKey:@"buy_level"];
+                user.buyLimit = [[userJson objectForKey:@"buy_limit"] objectForKey:@"amount"];
+                user.sellLevel = [userJson objectForKey:@"sell_level"];
+                user.sellLimit = [[userJson objectForKey:@"sell_limit"] objectForKey:@"amount"];
+                
+                handler(user, nil);
                 
             } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
                 handler(nil, error);
