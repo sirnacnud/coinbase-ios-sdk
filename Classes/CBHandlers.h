@@ -32,4 +32,6 @@ typedef void (^LoginHandler)(NSError *error);
 typedef void (^UserHandler)(CBUser *user, NSError *error);
 typedef void (^AccountsHandler)(NSArray *accounts, NSError *error);
 
+typedef void (^AccountChangesHandler)(NSArray *changes, NSError *error);
+
 #endif

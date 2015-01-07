@@ -18,5 +18,6 @@
 @property (nonatomic) BOOL primary;
 
 - (void)getBalance:(BalanceHandler)handler;
+- (void)getAccountChanges:(AccountChangesHandler)handler;
 
 @end

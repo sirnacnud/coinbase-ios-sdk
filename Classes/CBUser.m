@@ -30,8 +30,8 @@
             [accounts addObject:accountTwo];
         }
         
-        if( [JSON objectForKey:@"num_pages"] > [JSON objectForKey:@"current_page"] ) {
-            [self fetchAccounts:accounts withPage:[NSNumber numberWithInt:[page intValue] + 1] withHandler:handler];
+        if ([JSON objectForKey:@"num_pages"] > [JSON objectForKey:@"current_page"]) {
+            [self fetchAccounts:accounts withPage:[NSNumber numberWithInt:[page intValue]+1] withHandler:handler];
         } else {
             handler([NSArray arrayWithArray:accounts] , nil);
         }
