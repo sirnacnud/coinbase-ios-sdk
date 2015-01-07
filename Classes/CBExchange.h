@@ -15,7 +15,9 @@
 + (void)getTransfers:(CBResponseHandler)handler;
 
 + (void)getBuyPrice:(NSNumber*)qty withHandler:(PriceHandler)handler;
++ (void)getBuyPriceWithOutFee:(NSNumber*)qty withHandler:(PriceHandler)handler;
 + (void)getSellPrice:(NSNumber*)qty withHandler:(PriceHandler)handler;
++ (void)getSellPriceWithOutFee:(NSNumber*)qty withHandler:(PriceHandler)handler;
 + (void)getSpotRate:(NSString *)currency withHandler:(PriceHandler)handler;
 
 + (void)buyBitcoin:(NSNumber*)qty withHandler:(CBResponseHandler)handler;
