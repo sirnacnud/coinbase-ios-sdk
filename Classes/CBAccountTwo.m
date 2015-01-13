@@ -32,37 +32,36 @@
 }
 
 - (void)fetchAccountChanges:(NSMutableArray*)changes withPage:(NSNumber*)page withHandler:(AccountsHandler)handler {
-    NSDictionary *params = @{@"page": page, @"account_id": self.id };
-    AFHTTPRequestOperationManager *manager = [AFHTTPRequestOperationManager manager];
-    manager.requestSerializer = [AFJSONRequestSerializer serializer];
-    manager.responseSerializer = [AFJSONResponseSerializer serializer];
-    [manager GET:[NSString stringWithFormat:@"https://api.coinbase.com/v1/account_changes?access_token=%@", [CBTokens accessToken]] parameters:params success:^(AFHTTPRequestOperation *operation, id JSON) {
-        
-        NSArray *accountChanges = [JSON objectForKey:@"account_changes"];
-        for (id accountJson in accountChanges) {
-            [changes addObject:accountJson];
-        }
-        
-        if ([JSON objectForKey:@"num_pages"] > [JSON objectForKey:@"current_page"]) {
-            [self fetchAccountChanges:changes withPage:[NSNumber numberWithInt:[page intValue]+1] withHandler:handler];
-        } else {
-            handler([NSArray arrayWithArray:changes] , nil);
-        }
-        
-    } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
-        handler(nil, error);
-    }];
-
-}
-
-- (void)getAccountChanges:(AccountChangesHandler)handler {
     [CBRequest authorizedRequest:^(NSDictionary *result, NSError *error) {
         if (error) {
             handler(nil, error);
         } else {
-            [self fetchAccountChanges:[[NSMutableArray alloc] init] withPage:[NSNumber numberWithInt:1] withHandler:handler];
+            NSDictionary *params = @{@"page": page, @"account_id": self.id };
+            AFHTTPRequestOperationManager *manager = [AFHTTPRequestOperationManager manager];
+            manager.requestSerializer = [AFJSONRequestSerializer serializer];
+            manager.responseSerializer = [AFJSONResponseSerializer serializer];
+            [manager GET:[NSString stringWithFormat:@"https://api.coinbase.com/v1/account_changes?access_token=%@", [CBTokens accessToken]] parameters:params success:^(AFHTTPRequestOperation *operation, id JSON) {
+                
+                NSArray *accountChanges = [JSON objectForKey:@"account_changes"];
+                for (id accountJson in accountChanges) {
+                    [changes addObject:accountJson];
+                }
+                
+                if ([JSON objectForKey:@"num_pages"] > [JSON objectForKey:@"current_page"]) {
+                    [self fetchAccountChanges:changes withPage:[NSNumber numberWithInt:[page intValue]+1] withHandler:handler];
+                } else {
+                    handler([NSArray arrayWithArray:changes] , nil);
+                }
+                
+            } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
+                handler(nil, error);
+            }];
         }
     }];
+}
+
+- (void)getAccountChanges:(AccountChangesHandler)handler {
+    [self fetchAccountChanges:[[NSMutableArray alloc] init] withPage:[NSNumber numberWithInt:1] withHandler:handler];
 }
 
 @end
