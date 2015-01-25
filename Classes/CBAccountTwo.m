@@ -9,6 +9,7 @@
 #import "CBAccountTwo.h"
 #import "CBRequest.h"
 #include "CBTokens.h"
+#import <AFNetworking/AFNetworking.h>
 
 @implementation CBAccountTwo
 

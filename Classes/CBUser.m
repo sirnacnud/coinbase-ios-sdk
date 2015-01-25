@@ -10,6 +10,7 @@
 #import "CBAccountTwo.h"
 #import "CBRequest.h"
 #import "CBTokens.h"
+#import <AFNetworking/AFNetworking.h>
 
 @implementation CBUser
 

@@ -11,6 +11,7 @@
 #import "CBRequest.h"
 #import "CBTokens.h"
 #import "CBUser.h"
+#import <AFNetworking/AFNetworking.h>
 
 NSString *const CB_AUTH_CODE_NOTIFICATION_TYPE = @"CB_AUTHCODE_NOTIFICATION";
 NSString *const CB_AUTH_CODE_URL_KEY = @"CB_AUTHCODE_URL";

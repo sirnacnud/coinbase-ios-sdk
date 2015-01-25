@@ -9,6 +9,7 @@
 #import "CBExchange.h"
 #import "CBRequest.h"
 #import "CBTokens.h"
+#import <AFNetworking/AFNetworking.h>
 
 @implementation CBExchange
 + (void)getTransfers:(CBResponseHandler)handler {

@@ -9,6 +9,7 @@
 #import "CBRequest.h"
 #import "CBTokens.h"
 #import "Coinbase.h"
+#import <AFNetworking/AFNetworking.h>
 
 @implementation CBRequest
 

@@ -10,6 +10,7 @@
 #import "CBRequest.h"
 #import "CBTokens.h"
 #import "CBTransaction.h"
+#import <AFNetworking/AFNetworking.h>
 
 @implementation CBAccount
 

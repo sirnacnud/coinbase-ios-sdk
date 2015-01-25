@@ -12,6 +12,7 @@
 #import "CBTokens.h"
 #import "CBUser.h"
 #import "Coinbase.h"
+#import <AFNetworking/AFNetworking.h>
 
 @implementation CBTransaction
 
