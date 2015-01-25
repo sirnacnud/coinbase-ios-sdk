@@ -20,6 +20,8 @@
 + (void)setExpiryTime:(NSNumber*)expiryTime;
 + (void)setRefreshToken:(NSString*)refreshToken;
 
++ (void)setService:(NSString*)service;
+
 + (void)resetTokens;
 
 @end
