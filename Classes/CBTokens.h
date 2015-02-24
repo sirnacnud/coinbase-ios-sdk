@@ -21,6 +21,7 @@
 + (void)setRefreshToken:(NSString*)refreshToken;
 
 + (void)setService:(NSString*)service;
++ (void)setAccessGroup:(NSString*)accessGroup;
 
 + (void)resetTokens;
 
