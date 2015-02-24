@@ -36,17 +36,19 @@ static NSMutableArray *queuedAuthHandlers = nil;
                     double expiryTime = [[NSDate date] timeIntervalSince1970] + 7200;
                     [CBTokens setExpiryTime:[NSNumber numberWithDouble:expiryTime]];
                     
-                    for (CBResponseHandler queuedAuthHandler in queuedAuthHandlers) {
+                    NSMutableArray* queuedHandlesCopy = [queuedAuthHandlers copy];
+                    queuedAuthHandlers = nil;
+                    for (CBResponseHandler queuedAuthHandler in queuedHandlesCopy) {
                         queuedAuthHandler(JSON, nil);
                     }
-                    queuedAuthHandlers = nil;
                 });
                 
             } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
-                for (CBResponseHandler queuedHandler in queuedAuthHandlers) {
+                NSMutableArray* queuedHandlesCopy = [queuedAuthHandlers copy];
+                queuedAuthHandlers = nil;
+                for (CBResponseHandler queuedHandler in queuedHandlesCopy) {
                     queuedHandler(nil, error);
                 }
-                queuedAuthHandlers = nil;
             }];
         }
     } else {
