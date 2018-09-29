@@ -14,11 +14,11 @@
 
 + (void)getTransfers:(CBResponseHandler)handler;
 
-+ (void)getBuyPrice:(NSNumber*)qty withHandler:(PriceHandler)handler;
++ (void)getBuyPrice:(NSString*)currency withCoin:(NSString*)coin withHandler:(PriceHandler)handler;
 + (void)getBuyPriceWithOutFee:(NSNumber*)qty withHandler:(PriceHandler)handler;
-+ (void)getSellPrice:(NSNumber*)qty withHandler:(PriceHandler)handler;
++ (void)getSellPrice:(NSString*)currency withCoin:(NSString*)coin withHandler:(PriceHandler)handler;
 + (void)getSellPriceWithOutFee:(NSNumber*)qty withHandler:(PriceHandler)handler;
-+ (void)getSpotRate:(NSString *)currency withHandler:(PriceHandler)handler;
++ (void)getSpotRate:(NSString*)currency withCoin:(NSString*)coin withHandler:(PriceHandler)handler;
 
 + (void)buyBitcoin:(NSNumber*)qty withHandler:(CBResponseHandler)handler;
 + (void)sellBitcoin:(NSNumber*)qty withHandler:(CBResponseHandler)handler;

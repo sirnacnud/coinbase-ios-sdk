@@ -30,12 +30,14 @@
     }];
 }
 
-+ (void)getBuyPrice:(NSNumber*)qty withHandler:(PriceHandler)handler {
-    [CBRequest getRequest:@"https://api.coinbase.com/v1/prices/buy" withHandler:^(NSDictionary *result, NSError *error) {
++ (void)getBuyPrice:(NSString*)currency withCoin:(NSString*)coin withHandler:(PriceHandler)handler {
+    NSString *pair = [NSString stringWithFormat:@"%@-%@", coin, currency];
+    [CBRequest getRequest:[NSString stringWithFormat:@"https://api.coinbase.com/v2/prices/%@/buy", pair] withHandler:^(NSDictionary *result, NSError *error) {
         if (error) {
             handler(nil, error);
         } else {
-            handler([[result objectForKey:@"total"] objectForKey:@"amount"], nil);
+            NSDictionary *data = [result objectForKey:@"data"];
+            handler([data objectForKey:@"amount"], nil);
         }
     }];
 }
@@ -50,12 +52,14 @@
     }];
 }
 
-+ (void)getSellPrice:(NSNumber*)qty withHandler:(PriceHandler)handler {
-    [CBRequest getRequest:@"https://api.coinbase.com/v1/prices/sell" withHandler:^(NSDictionary *result, NSError *error) {
++ (void)getSellPrice:(NSString*)currency withCoin:(NSString*)coin withHandler:(PriceHandler)handler {
+    NSString *pair = [NSString stringWithFormat:@"%@-%@", coin, currency];
+    [CBRequest getRequest:[NSString stringWithFormat:@"https://api.coinbase.com/v2/prices/%@/sell", pair] withHandler:^(NSDictionary *result, NSError *error) {
         if (error) {
             handler(nil, error);
         } else {
-            handler([[result objectForKey:@"total"] objectForKey:@"amount"], nil);
+            NSDictionary *data = [result objectForKey:@"data"];
+            handler([data objectForKey:@"amount"], nil);
         }
     }];
 }
@@ -70,12 +74,14 @@
     }];
 }
 
-+ (void)getSpotRate:(NSString *)currency withHandler:(PriceHandler)handler {
-    [CBRequest getRequest:[NSString stringWithFormat:@"https://api.coinbase.com/v1/prices/spot_rate?currency=%@",currency] withHandler:^(NSDictionary *result, NSError *error) {
++ (void)getSpotRate:(NSString*)currency withCoin:(NSString*)coin withHandler:(PriceHandler)handler {
+    NSString *pair = [NSString stringWithFormat:@"%@-%@", coin, currency];
+    [CBRequest getRequest:[NSString stringWithFormat:@"https://api.coinbase.com/v2/prices/%@/spot", pair] withHandler:^(NSDictionary *result, NSError *error) {
         if (error) {
             handler(nil, error);
         } else {
-            handler([result objectForKey:@"amount"], nil);
+            NSDictionary *data = [result objectForKey:@"data"];
+            handler([data objectForKey:@"amount"], nil);
         }
     }];
 }
