@@ -135,8 +135,9 @@
 }
 
 + (void)getSupportedCurrencies:(CurrenciesHandler)handler {
-    [CBRequest getRequest:@"https://api.coinbase.com/v1/currencies" withHandler:^(id result, NSError *error) {
-        handler(result, error);
+    [CBRequest getRequest:@"https://api.coinbase.com/v2/currencies" withHandler:^(id result, NSError *error) {
+        NSArray *data = [result objectForKey:@"data"];
+        handler(data, error);
     }];
 }
 
