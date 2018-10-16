@@ -23,7 +23,7 @@
 + (void)buyBitcoin:(NSNumber*)qty withHandler:(CBResponseHandler)handler;
 + (void)sellBitcoin:(NSNumber*)qty withHandler:(CBResponseHandler)handler;
 
-+ (void)getExchangeRates:(CBResponseHandler)handler;
++ (void)getExchangeRatesForCurrency:(NSString*)currency withHandler:(CBResponseHandler)handler;
 + (void)getSupportedCurrencies:(CurrenciesHandler)handler;
 
 @end

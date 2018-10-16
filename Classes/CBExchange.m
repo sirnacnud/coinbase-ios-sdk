@@ -128,9 +128,10 @@
     }];
 }
 
-+ (void)getExchangeRates:(CBResponseHandler)handler {
-    [CBRequest getRequest:@"https://api.coinbase.com/v1/currencies/exchange_rates" withHandler:^(NSDictionary *result, NSError *error) {
-        handler(result, error);
++ (void)getExchangeRatesForCurrency:(NSString *)currency withHandler:(CBResponseHandler)handler {
+    [CBRequest getRequest:[NSString stringWithFormat:@"https://api.coinbase.com/v2/exchange-rates?currency=%@", currency] withHandler:^(NSDictionary *result, NSError *error) {
+        NSArray *data = [result objectForKey:@"data"];
+        handler(data, error);
     }];
 }
 
