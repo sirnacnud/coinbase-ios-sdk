@@ -31,5 +31,6 @@ FOUNDATION_EXPORT NSString *const CB_AUTH_CODE_URL_KEY;
 
 + (void)getAccount:(AccountHandler)handler __attribute__((deprecated("Use getUser instead")));
 + (void)getUser:(UserHandler)handler;
++ (void)getUserTwo:(UserTwoHandler)handler;
 
 @end

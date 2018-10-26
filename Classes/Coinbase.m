@@ -11,6 +11,7 @@
 #import "CBRequest.h"
 #import "CBTokens.h"
 #import "CBUser.h"
+#import "CBUserTwo.h"
 #import <AFNetworking/AFNetworking.h>
 
 NSString *const CB_AUTH_CODE_NOTIFICATION_TYPE = @"CB_AUTHCODE_NOTIFICATION";
@@ -178,6 +179,32 @@ static NSString *permissionsList;
                 user.buyLimit = [[userJson objectForKey:@"buy_limit"] objectForKey:@"amount"];
                 user.sellLevel = [userJson objectForKey:@"sell_level"];
                 user.sellLimit = [[userJson objectForKey:@"sell_limit"] objectForKey:@"amount"];
+                
+                handler(user, nil);
+                
+            } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
+                handler(nil, error);
+            }];
+        }
+    }];
+}
+
++ (void)getUserTwo:(UserTwoHandler)handler {
+    [CBRequest authorizedRequest:^(NSDictionary *result, NSError *error) {
+        if (error) {
+            handler(nil, error);
+        } else {
+            AFHTTPRequestOperationManager *manager = [AFHTTPRequestOperationManager manager];
+            manager.responseSerializer = [AFJSONResponseSerializer serializer];
+            NSString *value = [NSString stringWithFormat:@"Bearer %@", [CBTokens accessToken]];
+            [manager.requestSerializer setValue:value forHTTPHeaderField:@"Authorization"];
+            [manager GET:@"https://api.coinbase.com/v2/user" parameters:nil success:^(AFHTTPRequestOperation *operation, id JSON) {
+                
+                NSDictionary *userJson = [JSON objectForKey:@"data"];
+                
+                __block CBUserTwo *user = [[CBUserTwo alloc] init];
+                user.name = [userJson objectForKey:@"name"];
+                user.avatar = [userJson objectForKey:@"avatar_url"];
                 
                 handler(user, nil);
                 

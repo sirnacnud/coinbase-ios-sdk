@@ -12,6 +12,7 @@
 @class CBTransaction;
 @class CBAccount;
 @class CBUser;
+@class CBUserTwo;
 
 typedef void (^TransactionsHandler)(NSArray *transactions, NSError *error);
 typedef void (^BalanceHandler)(NSString *balance, NSError *error);
@@ -30,6 +31,7 @@ typedef void (^AccountHandler)(CBAccount *account, NSError *error);
 typedef void (^LoginHandler)(NSError *error);
 
 typedef void (^UserHandler)(CBUser *user, NSError *error);
+typedef void (^UserTwoHandler)(CBUserTwo *user, NSError *error);
 typedef void (^AccountsHandler)(NSArray *accounts, NSError *error);
 
 typedef void (^AccountChangesHandler)(NSArray *changes, NSError *error);
